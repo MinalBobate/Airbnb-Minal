@@ -1,0 +1,111 @@
+<%- include('./partials/header') %>
+
+
+  <div id="registerPropertyForm" class="m-5 p-4">
+    <form action="/registerProperty" method="post" enctype="multipart/form-data">
+      <input type="text" class="form-control mb-3" name="PropertyName" id="PropertyName" placeholder="Property Name"
+        required>
+      <input type="text" class="form-control mb-3" name="HostName" id="HostName" placeholder="Host Name" required>
+
+      <div class="form-control mb-3">
+        <label for="propertyType">Property type</label>
+        <select name="propertyType" required>
+          <option value="" disabled selected>Please Select</option>
+          <option value="Tiny Homes">Tiny Home</option>
+          <option value="Cabins">Cabin</option>
+          <option value="Beach Houses">Beach House</option>
+          <option value="Countryside">Countryside</option>
+          <option value="Shared Homes">Shared Home</option>
+          <option value="Lake House">Lake House</option>
+          <option value="Others">Others</option>
+        </select>
+      </div>
+      <div class="row mb-3 mb-3">
+        <div class="col-sm-6">
+          <!-- <label for="city">City</label> -->
+          <input class="form-control" type="text" name="city" id="city" value="" placeholder="City" required>
+        </div>
+        <div class="col-sm">
+          <!-- <label for="state">State</label> -->
+          <input class="form-control" type="text" name="state" id="state" value="" placeholder="State">
+        </div>
+        <div class="col-sm">
+          <!-- <label for="country">Country</label> -->
+          <input class="form-control" type="text" name="country" id="country" value="" placeholder="Country">
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col">
+          <!-- <label for="price">Price</label> -->
+          <input class="form-control" type="number" name="price" value="" placeholder="Enter Price/Night" required>
+        </div>
+        <div class="col">
+          <!-- <label for="area">Area</label> -->
+          <input class="form-control" type="number" name="Enter property area in sq.ft." value="" placeholder="Area">
+        </div>
+      </div>
+      <div class="row g-3">
+        <div class="col-sm">
+          <!-- <label for="bedrooms">No. of Bedrooms</label> -->
+          <input class="form-control" type="number" name="bedrooms" id="bedrooms" value=""
+            placeholder="Number of bedrooms" required>
+        </div>
+        <div class="col-sm">
+          <!-- <label for="beds">No. of Beds</label> -->
+          <input class="form-control" type="number" name="beds" id="beds" value="" placeholder="Number of beds"
+            required>
+        </div>
+        <div class="col-sm">
+          <!-- <label for="bathrooms">No. of Bathrooms</label> -->
+          <input class="form-control" type="number" name="bathrooms" id="bathrooms" value=""
+            placeholder="Number of bathrooms" required>
+        </div>
+        <div class="col-sm">
+          <!-- <label for="guests">Guests Allowed</label> -->
+          <input class="form-control" type="number" name="guests" id="guests" value="" placeholder="Guests allowed"
+            required>
+        </div>
+      </div>
+      <br>
+      <hr>
+      <div style="color: #212529" class="mx-3">
+        <label for="amenities" class="my-3"> Amenties</label><br>
+<div class="row"><div class="col-6">
+        <div class="row">
+          <div class="col-6"><input class="form-check-input " type="checkbox" name="gardenview" value="true"> Garden view</div>
+          <div class="col-6"><input class="form-check-input " type="checkbox" name="beachaccess" value="true"> Beache Access</div>
+          <div class="col-6"><input class="form-check-input " type="checkbox" name="wifi" value="true"> Wifi</div>
+          <div class="col-6"><input class="form-check-input " type="checkbox" name="parking" value="true"> Parking</div>
+          <div class="col-6"><input class="form-check-input " type="checkbox" name="pool" value="true"> Pool</div>
+          <div class="col-6"><input class="form-check-input " type="checkbox" name="mountainview" value="true"> Mountain view</div>
+        </div>
+          
+       
+        <div class="row">
+          <div class="col-6"><input class="form-check-input " type="checkbox" name="kitchen" value="true"> Kitchen</div>
+          <div class="col-6"><input class="form-check-input " type="checkbox" name="tv" value="true"> Television</div>
+          <div class="col-6"><input class="form-check-input " type="checkbox" name="pets" value="true"> Pets allowed</div>
+          <div class="col-6"><input class="form-check-input " type="checkbox" name="ac" value="true"> Air conditioning</div>
+          <div class="col-6"><input class="form-check-input " type="checkbox" name="workspace" value="true"> Dedicated workspace
+          </div>
+          <div class="col-6"><input class="form-check-input " type="checkbox" name="alarm" value="true"> Alarm</div>
+          <div class="col-6"><input class="form-check-input " type="hidden" name="email" value="email"></div>
+        </div>
+      </div>
+    </div>
+      </div>
+      <hr>
+
+      <br>
+      <div>
+        <textarea name="description" rows="5" placeholder="Describe your property" class="form-control"></textarea>
+      </div>
+
+      <br>
+      <label for="gallery_img" class="mx-1 my-1">Upload min. five images</label>
+      <input type="file" name="gallery_img" class="form-control" multiple required><br>
+      <div class="d-flex justify-content-center"><button class="btn btn-block btn-primary  " type="submit">Register Property</button></div>
+    </form>
+  </div>
+
+  <%- include('./partials/footer') %>

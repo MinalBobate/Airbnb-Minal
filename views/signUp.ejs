@@ -1,0 +1,78 @@
+<%-include('./partials/header') %>
+<div class="conatiner mx-3 p-5" style="margin-left: auto; margin-right: auto;">
+    <form action="/user/signUp" method="POST" enctype="multipart/form-data" class="row g-3">
+        <div class="input-field">
+            <label for="userType">User type</label>
+            <select name="userType" class="form-select" id="userType" required>
+                <option value="guest">Guest</option>
+                <option value="host">Host</option>
+            </select>
+        </div>
+        <div class="row g-2">
+            <div class="col form-floating">
+                <input type="text" class="form-control" name="firstName" id="firstName" value="" required placeholder="First name">
+                <label for="firstName">First name</label>
+            </div>
+            <div class="col form-floating">
+                <input type="text" class="form-control" name="middleName" id="middleName" value="" required placeholder="Middle name">
+                <label for="middleName">Middle name</label>
+            </div>
+            <div class="col form-floating">
+                <input type="text" class="form-control" name="lastName" value="" required placeholder="Last name">
+                <label for="lastName">Last name</label>
+            </div>
+        </div>
+        <div class="row g-2">
+            <div class="col">
+                <label for="gender">Gender</label><br>
+                <input type="radio" class="form-check-input" name="gender" value="Male"> Male
+                <input type="radio" class="form-check-input" name="gender" value="Female"> Female
+                <input type="radio" class="form-check-input" name="gender" value="Other"> Other
+            </div>
+           
+            <div class="col">
+                <label for="contactNumber">Contact</label>
+                <input type="number" class="form-control" name="contactNumber" id="contact" value="" required>
+            </div>
+            <div class="col">
+                <label for="profile">Profile image</label>
+                <input type="file" name="profile" required>
+            </div>
+        </div>
+
+        <div class="row g-2">
+            <div class="col form-floating">
+                <input type="text" class="form-control" name="city" id="city" value="" required placeholder="City">
+                <label for="city">City</label>
+            </div>
+            <div class="col form-floating">
+                <input type="text" class="form-control" name="state" id="state" value="" required placeholder="City">
+                <label for="state">State</label>
+            </div>
+
+            <div class="col form-floating">
+                <input type="text" class="form-control" name="country" id="country" value="" required placeholder="Country">
+                <label for="country">Country</label>
+            </div>
+        </div>
+        <div class="form-floating">
+            <input type="email" class="form-control" name="email" id="email" value="" required placeholder="name@example.com">
+            <label for="email">Email</label>
+        </div>
+
+        <div class="row g-2">
+            <div class="col form-floating">
+                <input type="password" class="form-control" name="password" id="pswd" value="" required placeholder="Password">
+                <label for="pswd">Password</label>
+            </div>
+            <div class="col form-floating">
+                <input type="password" class="form-control" name="comparepswd" id="comparepswd" value="" required placeholder="Confirm password">
+                <label for="comparepswd">Confirm Password</label>
+            </div>
+        </div>
+        <div class="col-12">
+            <button type="submit" class="btn btn-secondary" onclick="this.form.submit">Sign up</button>
+        </div>
+
+    </form>
+</div>

@@ -1,0 +1,52 @@
+<%- include('./partials/header') %>
+
+
+
+<body>
+    <div class="login-div-outer-container">
+        <div class="login-div">
+            <div class="login-left-div">
+                <div class="regInfoDiv">
+                    <h1><b>New to Airbnb..?</b></h1>
+                    <h4><a style="text-decoration: none;" href="/user/signUp"><span
+                                style="color: black; text-decoration:underline;">Register</span></a> to get started.
+                    </h4>
+                </div>
+            </div>
+
+            <div class="login-right-div">
+                <div>
+                    <div>
+                        <span style="font-size: 4rem; color: white;"><i class="fa-brands fa-airbnb"></i></span>
+                        <h3 style="color: white">Welcome to Airbnb</h3>
+                    </div>
+                </div>
+                <div class="p-3">
+                    <form action="/user/signIn" method="POST">
+
+                        <div>
+                            <div class="form-floating mb-3">
+                                <input type="text" name="username" class="form-control" id="uName" required
+                                    placeholder="Username">
+                                <label for="uName">Username</label>
+                            </div>
+
+                            <div class="form-floating mb-3">
+                                <input type="password" name="password" class="form-control" id="fPassword" required
+                                    placeholder="Password">
+                                <label for="fPassword">Password</label>
+                            </div>
+                        </div>
+                        <div class="">
+                            <button type="submit" class="btn btn-light">Sign in</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <%- include('./partials/footer') -%>
+</body>
+</html>
