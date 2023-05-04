@@ -4,6 +4,9 @@ const path = require('path');
 const app = express();
 const dotenv = require('dotenv');
 const multer = require("multer")
+const jwt = require('jsonwebtoken');
+const cookieParser=require("cookie-parser")
+
 const connection = require('./connection')
 
 //model
@@ -23,7 +26,7 @@ const adminRoute=require("./controllers/adminController")
 app.use(express.static('public'));
 app.use(express.json());//required for post request
 app.use(express.urlencoded({ extended: false }));//for form data
-
+app.use(cookieParser())
 
 app.set('view engine', 'ejs');
 app.set('views', path.resolve('./views'))
@@ -31,12 +34,29 @@ dotenv.config();
 
 
 app.get("/", async function (req, res) {
-   
-    Property.find({}).then(function (properties) { res.render("home", { properties: properties }); })
-        .catch(function (err) {
-            console.log(err);
-        })
-
+    try {
+        
+        let token = req.cookies.mycookiename;
+        if(token){
+            let user = jwt.verify(token, process.env.JWT_SECRET_KEY);
+            const userNamedb = await User.findOne({ email: user.email });
+            console.log(userNamedb);
+            if (userNamedb.userType == "guest") {
+                isGuest = true;
+            } else {
+                isGuest = false;
+            }
+        }else{console.log("inside else")}
+        console.log("outside if and else")
+        let result=await Property.find({})
+        console.log(result)
+         res.render("home",{properties:result})
+    } catch (error) {
+        let errorMessage = "Error fetching properties";
+        let redirectLink = "";
+        let btnText = "Try again";
+        res.render("failure", { errorMessage: errorMessage, redirectLink: redirectLink, btnText: btnText });
+    }
 })
 
 app.get('/siteinstructions',async function(req,res){

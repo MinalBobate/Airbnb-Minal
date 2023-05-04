@@ -10,7 +10,9 @@ const Property = require('../model/properties')
 const User = require('../model/users')
 const Booking = require('../model/bookings')
 const Reiview = require('../model/reviews')
+
 // admin
+
 router.get("/", function (req, res) {
     res.status(200).render("adminLogin");
 })

@@ -11,7 +11,7 @@ const userSchema = new mongoose.Schema({
     email: String,
     password: String,
     Name: String,
-    contactNumber: Number,
+    contactNumber: String,
 
     country: String,
     state:String,
@@ -58,7 +58,7 @@ userSchema.methods.generateAuthToken = async function () {
         // this.tokens = this.tokens.concat({token: token});
 
         const token = jwt.sign({"email": this.email}, process.env.JWT_SECRET_KEY);
-        this.tokens = token;
+res.cooo
         await this.save();
         return token;
     } catch (error) {
