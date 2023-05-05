@@ -27,6 +27,8 @@ app.use(express.static('public'));
 app.use(express.json());//required for post request
 app.use(express.urlencoded({ extended: false }));//for form data
 app.use(cookieParser())
+app.use("/ProfileImages", express.static(__dirname+"/ProfileImages"))
+app.use("/PropertyImages", express.static(__dirname+"/PropertyImages"))
 
 app.set('view engine', 'ejs');
 app.set('views', path.resolve('./views'))
@@ -35,22 +37,29 @@ dotenv.config();
 
 app.get("/", async function (req, res) {
     try {
-        
+        let isGuest;
         let token = req.cookies.mycookiename;
+        console.log(token)
         if(token){
+            let isHost;
             let user = jwt.verify(token, process.env.JWT_SECRET_KEY);
-            const userNamedb = await User.findOne({ email: user.email });
-            console.log(userNamedb);
-            if (userNamedb.userType == "guest") {
-                isGuest = true;
-            } else {
-                isGuest = false;
+            const userNamedb = await User.findOne({ email: user.email });     
+            //console.log(userNamedb)
+            if(userNamedb.userType=="host"){
+              isHost=true;
+            }else{
+              isHost=false;
             }
-        }else{console.log("inside else")}
-        console.log("outside if and else")
-        let result=await Property.find({})
-        console.log(result)
-         res.render("home",{properties:result})
+        }else{ 
+            userNamedb=false;
+        }
+        //userNamedb=false; isHost=false;
+        //console.log("after fetching properties")
+       console.log(userNamedb);//userNamedb contains some error
+       console.log(isHost)
+       let result=await Property.find({})
+       res.render("home",{properties:result,LoggedUser:userNamedb, isHost:isHost        
+        })
     } catch (error) {
         let errorMessage = "Error fetching properties";
         let redirectLink = "";
@@ -98,3 +107,4 @@ app.use('/admin',adminRoute)
 app.listen(process.env.PORT, () => { console.log("server started at 8000") })
 
 //???  app.listen(process.env.PORT,()=>{console.log(`server started at ${PORT}`);})   ????why error
+

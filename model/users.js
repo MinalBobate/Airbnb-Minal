@@ -31,7 +31,7 @@ const userSchema = new mongoose.Schema({
 userSchema.pre("save", function (next) {
     // adding full name to every new user's data
     if (this.isNew) {
-        this.userType = "user";
+       
         let fname = this.fName.trim().toLowerCase();
         this.fName = fname.charAt(0).toUpperCase() + fname.slice(1);
 

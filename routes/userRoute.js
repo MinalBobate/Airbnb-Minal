@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router();
-const {signInGet,signUpGet,signInPost,signUpPost}=require('../controllers/userController')
+const {signInGet,signUpGet,signInPost,signUpPost,myHostedProperties,myBookedProperties}=require('../controllers/userController')
 const multer=require('multer')
 
 const ProfileImages = multer.diskStorage({
@@ -35,7 +35,7 @@ router.get('/signIn',signInGet)
 router.get('/signUp',signUpGet)
 router.post('/signIn',signInPost)
 router.post('/signUp',ProfileImage.single('profile'),signUpPost)
-
-
+router.get('/myHostedProperties',myHostedProperties)
+router.get('/myBookedProperties',myBookedProperties)
 
 module.exports = router;
