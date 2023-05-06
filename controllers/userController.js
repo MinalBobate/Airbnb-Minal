@@ -117,7 +117,14 @@ const myBookedProperties=async(req,res)=>{
 
 }
 
+const LogOut =async(req,res)=>{
+  
+        res.clearCookie("mycookiename");
+        res.redirect("/");
+   
+}
+
 
  module.exports={
-   signInGet, signUpGet, signInPost, signUpPost,myHostedProperties,myBookedProperties
+   signInGet, signUpGet, signInPost, signUpPost,myHostedProperties,myBookedProperties,LogOut
 }

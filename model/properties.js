@@ -2,20 +2,20 @@
 const mongoose=require('mongoose');
 
  const propertySchema = new mongoose.Schema({
-    propertyID: { type: Number, required: true },
+   
     propertyName: String,
     propertyType: String,
     owner: String,
     ownerImg: String,
-    userID: { type: Number, required: true },
+    email:String,
     city: String,
     state: String,
     country: String,
     price: Number,
     area: String,
-    bedroom: Number,
-    bed:Number,
-    bathroom: Number,
+    bedrooms: Number,
+    beds:Number,
+   
     maxGuests: Number,
    
      amenities: {
@@ -68,11 +68,6 @@ const mongoose=require('mongoose');
             default: false
         }
      },
-    images:  {
-        data: Buffer,
-        contentType: String
-    },
-     
     description: String,
     review: [
         {
@@ -80,7 +75,9 @@ const mongoose=require('mongoose');
             starRating: Number,
             reviewContent: String
         }
-    ]  });
+    ] ,
+    propertyImages:String
+ });
 
   propertySchema.post("save", async function () {
     // changing user type to host on property registration

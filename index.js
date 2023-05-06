@@ -37,14 +37,15 @@ dotenv.config();
 
 app.get("/", async function (req, res) {
     try {
-        let isGuest;
+       let user
+        let  userNamedb
+        let isHost;
         let token = req.cookies.mycookiename;
-        console.log(token)
         if(token){
-            let isHost;
-            let user = jwt.verify(token, process.env.JWT_SECRET_KEY);
-            const userNamedb = await User.findOne({ email: user.email });     
-            //console.log(userNamedb)
+           
+             user = jwt.verify(token, process.env.JWT_SECRET_KEY);
+             userNamedb = await User.findOne({ email: user.email });     
+            
             if(userNamedb.userType=="host"){
               isHost=true;
             }else{
@@ -52,11 +53,9 @@ app.get("/", async function (req, res) {
             }
         }else{ 
             userNamedb=false;
-        }
-        //userNamedb=false; isHost=false;
-        //console.log("after fetching properties")
-       console.log(userNamedb);//userNamedb contains some error
-       console.log(isHost)
+        } 
+      
+    console.log()
        let result=await Property.find({})
        res.render("home",{properties:result,LoggedUser:userNamedb, isHost:isHost        
         })

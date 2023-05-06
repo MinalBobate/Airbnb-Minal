@@ -35,7 +35,7 @@
                         <span style="margin-left: 10px;">
 
                             <% if ( LoggedUser ) { %>
-                                <img src="ProfileImages<%=LoggedUser.profilePicture%>" alt="dp"
+                                <img src="/ProfileImages/<%=LoggedUser.profilePicture%>" alt="dp"
                                     style="width: 2rem; height: 2rem; border-radius: 50%;">
                             <%} else { %>
                                     <i class="fa-solid fa-user"></i>
@@ -54,17 +54,19 @@
     <!-- login sign up pop up on button click -->
     <div id="popupDiv">
         <ul class="loginPopup">
+            
+            <li><button><a style="color: inherit; text-decoration: none;"
+                href="/user/signUp">Sign up</a></button></li>
+           <li><button><a style="color: inherit; text-decoration: none;"
+               href="/user/signIn">Login</a></button></li>
+                       <hr>
            <% if ( LoggedUser ) { %>
                 <li><button><a style="color: inherit; text-decoration: none;" href="/user/myBookedProperties">My
                                     Booked Properties</a></button></li>
-            <% }else{ %>
+                <li><button><a style="color: inherit; text-decoration: none;" href="/user/logOut">Log Out</a></button></li>
+            <% } %>
 
-                <li><button><a style="color: inherit; text-decoration: none;"
-                     href="/user/signUp">Sign up</a></button></li>
-                <li><button><a style="color: inherit; text-decoration: none;"
-                    href="/user/signIn">Login</a></button></li>
-                            <hr>
-            <%}%>
+           
             <%if(isHost){ %>
                 <li><button><a style="color: inherit; text-decoration: none;" href="/user/myHostedProperties">My Hosted
                             Properties</a></button></li>
@@ -85,7 +87,7 @@
                         <% for(let i=0; i < properties.length; i++) { %>
                             <!-- Image Slider -->
                             <div class="col-lg-4" style="width: 16rem;">
-                                <a href="/property/<%=properties[i]._id%>"
+                                <a href="/property/particularProperty/:property_id/<%=properties[i]._id%>"
                                     style="text-decoration: none; color: inherit;">
                                     <div id="image-carousel<%=i%>" class="carousel slide" data-bs-interval="false">
                                         <div class="carousel-indicators">
@@ -106,7 +108,7 @@
                                         <!-- carousal -->
 
                                         <!-- carousel control buttons -->
-                                        <button class="carousel-control-prev" type="button"
+                                        <button class="carousel-control-sprev" type="button"
                                             data-bs-target="#image-carousel<%=i%>" data-bs-slide="prev">
                                             <span aria-hidden="true"
                                                 style="background-color: white; border-radius: 50% !important; width: 1.5rem; height: 1.5rem;"><i
