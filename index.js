@@ -14,6 +14,7 @@ const Property = require('./model/properties')
 const User = require('./model/users')
 const Booking = require('./model/bookings')
 const Reiview = require('./model/reviews')
+const Help=require('./model/help')
 //routes
 const userRoute = require("./routes/userRoute");
 const propertyRoute = require("./routes/propertyRoute");
@@ -75,6 +76,7 @@ app.get('/help',async function(req,res){
  })
 app.post("/help", function (req, res) {
     try {
+        console.log(req.body);
         let supportQuery = new Help({
             name: req.body.name,
             email: req.body.email,
@@ -106,4 +108,5 @@ app.use('/admin',adminRoute)
 app.listen(process.env.PORT, () => { console.log("server started at 8000") })
 
 //???  app.listen(process.env.PORT,()=>{console.log(`server started at ${PORT}`);})   ????why error
+
 

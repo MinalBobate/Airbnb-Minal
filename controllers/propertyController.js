@@ -1,18 +1,20 @@
 const jwt=require('jsonwebtoken')
 const Property = require('../model/properties')
-
+const User=require('../model/users')
 
 const registerProperty=async(req,res)=>{
    try {
         let user;
+        let userType;
         let cookieName = req.cookies.mycookiename;
         if(cookieName){        
           user = jwt.verify(cookieName, process.env.JWT_SECRET_KEY)
+          userType=user.userType
         }else{
             res.redirect("/user/signIn");
         }
             
-            if(user.userType=="guest"){
+            if(userType=="guest"){
                     let filterEmail=user.email
                     //user.userType="host";
                     //await
@@ -35,14 +37,25 @@ const registerProperty=async(req,res)=>{
 
 const registerPropertyPost= async (req, res) =>{
     try {
-        console.log(req.body);
+        
+        const filepaths=[];
+        req.files.forEach(file => {
+            filepaths.push(file.path)
+        })
+        console.log(filepaths);
+        
+        let user;
+        let email;
+        let cookieName = req.cookies.mycookiename;
+        if(cookieName){        
+          user = jwt.verify(cookieName, process.env.JWT_SECRET_KEY)
+          email=user.email
+        }
         let property = new Property({
          
             propertyName: req.body.propertyName,
             propertyType:req.body.propertyType,
             owner: req.body.owner,
-            ownerImg:req.body.ownerImg,
-             email: req.body.email,
             city: req.body.city,
             state: req.body.state,
             country: req.body.country,
@@ -66,11 +79,12 @@ const registerPropertyPost= async (req, res) =>{
             alarm: req.body.alarm,
 
             description:req.body.description,
-            propertyImages:req.file.filename
-
+            propertyImages:filepaths,
+            email:email
         });
+        console.log(property);
 
-        await Property.save(function (err, success) {
+        await property.save(function (err, success) {
             if (!err) {
                 let redirectLink = "registerproperty";
                 let btnText = "Add other property";
@@ -84,7 +98,8 @@ const registerPropertyPost= async (req, res) =>{
         });
         res.redirect("/")
     } catch (error) {
-        res.send(error);
+        
+        res.status(400).send("error catch");
     }
 
 }
@@ -99,33 +114,46 @@ const particularProperty= async  (req, res) =>{
         var requestedProperty;
         var hostEmail;
         let userNamedb;
+        let user;
 
         let token = req.cookies.mycookiename;
-        jwt.verify(token, process.env.JWT_SECRET_KEY, function (err, decoded) {
-            if (!err) {
-                User.findOne({ email: decoded.email }, function (err, result) {
-                    if (!err) {
-                        userNamedb = result;
-                    }else{
-                      
-                    }
-                });
+        if(token){    
+             user=await jwt.verify(token, process.env.JWT_SECRET_KEY)
+             await User.findOne({ email: user.email }, function (err, result) {
+                if (!err) {
+                    userNamedb = result;
+                }else{
+                  userNamedb={}
+                }
+            });
+            }
 
-                Property.findOne({ _id: mongoose.Types.ObjectId(requestedPropertyId) }, function (err, result) {
+           
+             
+        await Property.findOne({ _id: mongoose.Types.ObjectId(requestedPropertyId) }, function (err, result) {
                     if (!err) {
                         requestedProperty = result;
                         hostEmail = requestedProperty.email;
+
+
+
+
+
+
+
                         User.findOne({ email: hostEmail }, function (err, doc) {
                             if (!err) {
-                                res.render("property", { property: requestedProperty, hostProfile: doc, user: userNamedb });
-                            }else{}
+                                res.render("particularProperty", { property: requestedProperty, hostProfile: doc, user: userNamedb });
+                            }else{
+                                console.log("host email not found in user database",err);
+                            }
                         });
                     } else {
-                        console.log(err);
+                        console.log(err,"property not found");
                     }
                 });
-            }
-        });
+            
+        
     } catch (error) {
         
         res.send(error);

@@ -12,7 +12,7 @@ const mongoose=require('mongoose');
     state: String,
     country: String,
     price: Number,
-    area: String,
+    area: Number,
     bedrooms: Number,
     beds:Number,
    
@@ -76,58 +76,12 @@ const mongoose=require('mongoose');
             reviewContent: String
         }
     ] ,
-    propertyImages:String
+    propertyImages:[]
  });
 
-  propertySchema.post("save", async function () {
-    // changing user type to host on property registration
-    if (this.isNew) {
-        let owner = await User.findOne({ userID: this.userID }, { userType: 1 });
-        if (owner.userType === "user") {
-            owner.userType = "host";
-            await owner.save();
-        }
-    }
-});
+  
 
-propertySchema.pre("findOneAndDelete", async function (next) {
-    console.log(this.propertyID);
-    const property = await Property.findOne(this.getQuery());
-    console.log(property.propertyID);
-    try {
-        await Booking.updateMany(
-            { propertyID: property.propertyID },
-            { $set: { propertyID: null } },
-            (err, docs) => {
-                if (err) {
-                    console.log(err);
-                } else {
-                    console.log("Updated Booking:", docs);
-                }
-            }
-        );
-    } catch (error) {
-        console.log("No bookings found");
-    }
 
-    try {
-        await Review.updateMany(
-            { propertyID: property.propertyID },
-            { $set: { propertyID: null } },
-            (err, docs) => {
-                if (err) {
-                    console.log(err);
-                } else {
-                    console.log("Updated reviews:", docs);
-                }
-            }
-        );
-    } catch (error) {
-        console.log("No reviews found");
-    }
-
-    next();
-});
 
 const Property = mongoose.model("propertie", propertySchema);
 module.exports=Property;

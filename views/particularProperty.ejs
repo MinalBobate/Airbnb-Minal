@@ -40,7 +40,7 @@
                         <span style="margin-left: 10px;"><i class="fa-solid fa-user"></i></span>
                         <% } else { %>
                         <span style="margin-left: 10px;">
-                            <img src="data:image/<%=user.img.contentType%>;base64,<%=user.img.data.toString('base64')%>"
+                            <img src="<%=user.profilePicture%>"
                                 alt="profile" style="width: 2rem; height: 2rem; border-radius: 50%;">
                         </span>
                         <% } %>
@@ -102,20 +102,20 @@
             </div>
             <div class="sideImages">
                 <div class="sideImgDiv">
-                    <img src="data:image/<%=property.img[1].contentType%>;base64,<%=property.img[1].data.toString('base64')%>"
+                    <img src="<%=property.propertyImages[0]%>"
                         alt="property-image2">
                 </div>
 
                 <div class="sideImgDiv rightTopImg">
-                    <img src="data:image/<%=property.img[2].contentType%>;base64,<%=property.img[2].data.toString('base64')%>"
+                    <img src="<%=property.propertyImages[1]%>"
                         alt="property-image3">
                 </div>
                 <div class="sideImgDiv">
-                    <img src="data:image/<%=property.img[3].contentType%>;base64,<%=property.img[3].data.toString('base64')%>"
+                    <img src="<%=property.propertyImages[2]%>"
                         alt="property-image4">
                 </div>
                 <div class="sideImgDiv rightBottomImg" style="position: relative;">
-                    <img src="data:image/<%=property.img[0].contentType%>;base64,<%=property.img[0].data.toString('base64')%>"
+                    <img src="<%=property.propertyImages[3]%>"
                         alt="property-image5">
                     <div
                         style="position: absolute !important; z-index: 3 !important; bottom: 24px !important; right: 24px !important">
@@ -144,7 +144,7 @@
         </div>
         <div class="mt-3">
             <img class="hostProfile"
-                src="data:image/<%=hostProfile.img.contentType%>;base64,<%=hostProfile.img.data.toString('base64')%>"
+                src="<%=hostProfile.profilePicture%>"
                 alt="host profile image">
             <span><%=hostProfile.fName %> <%=hostProfile.LName %></span>
         </div>
@@ -492,7 +492,7 @@
         <div style="display: flex; gap: 20px;">
             <div>
                 <img class="hostProfile"
-                    src="data:image/<%=hostProfile.img.contentType%>;base64,<%=hostProfile.img.data.toString('base64')%>"
+                    src="<%=hostProfile.profilePicture%>"
                     alt="host profile image">
             </div>
             <div>

@@ -9,7 +9,7 @@ router.use(express.urlencoded({ extended: false }));//for form data
 const Property = require('../model/properties')
 const User = require('../model/users')
 const Booking = require('../model/bookings')
-const Reiview = require('../model/reviews')
+const Review = require('../model/reviews')
 
 // admin
 

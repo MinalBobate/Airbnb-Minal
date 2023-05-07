@@ -87,7 +87,7 @@
                         <% for(let i=0; i < properties.length; i++) { %>
                             <!-- Image Slider -->
                             <div class="col-lg-4" style="width: 16rem;">
-                                <a href="/property/particularProperty/:property_id/<%=properties[i]._id%>"
+                                <a href="/property/particularProperty/:<%=properties[i]._id%>"
                                     style="text-decoration: none; color: inherit;">
                                     <div id="image-carousel<%=i%>" class="carousel slide" data-bs-interval="false">
                                         <div class="carousel-indicators">
